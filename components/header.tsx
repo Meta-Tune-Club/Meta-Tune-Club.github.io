@@ -1,4 +1,5 @@
 import Link from "next/link";
+import MintNft from "./mintNft";
 import { getCsrfToken, signIn, signOut, useSession } from "next-auth/react";
 import styles from "./header.module.css";
 import { useWalletModal } from "@solana/wallet-adapter-react-ui";
@@ -6,13 +7,34 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { SigninMessage } from "../utils/SigninMessage";
 import bs58 from "bs58";
 import { useEffect } from "react";
+import React, { FC, useMemo } from 'react';
+import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
+import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
+import {
+    WalletModalProvider,
+    WalletDisconnectButton,
+    WalletMultiButton
+} from '@solana/wallet-adapter-react-ui';
+import { clusterApiUrl } from '@solana/web3.js';
+import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets';
+
+require('@solana/wallet-adapter-react-ui/styles.css');
 
 export default function Header() {
+  const network = WalletAdapterNetwork.Devnet;
+  const endpoint = useMemo(() => clusterApiUrl(network), [network])
   const { data: session, status } = useSession();
   const loading = status === "loading";
 
   const wallet = useWallet();
   const walletModal = useWalletModal();
+  const wallets = useMemo(
+    () => [
+        new PhantomWalletAdapter(),
+    ],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [network]
+);
 
   const handleSignIn = async () => {
     try {
@@ -51,6 +73,10 @@ export default function Header() {
   }, [wallet.connected]);
 
   return (
+    <ConnectionProvider endpoint={endpoint}>
+            <WalletProvider wallets={wallets} autoConnect>
+                <WalletModalProvider>
+                    <WalletMultiButton />
     <header>
       <noscript>
         <style>{`.nojs-show { opacity: 1; top: 0; }`}</style>
@@ -115,8 +141,17 @@ export default function Header() {
               <a>Me</a>
             </Link>
           </li>
+          <li className={styles.navItem}>
+            <Link href="/customMint">
+              <a>Custom Mint</a>
+            </Link>
+          </li>
         </ul>
       </nav>
     </header>
+    <MintNft/>
+    </WalletModalProvider>
+            </WalletProvider>
+        </ConnectionProvider>
   );
 }
