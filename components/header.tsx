@@ -73,10 +73,6 @@ export default function Header() {
   }, [wallet.connected]);
 
   return (
-    <ConnectionProvider endpoint={endpoint}>
-            <WalletProvider wallets={wallets} autoConnect>
-                <WalletModalProvider>
-                    <WalletMultiButton />
     <header>
       <noscript>
         <style>{`.nojs-show { opacity: 1; top: 0; }`}</style>
@@ -149,9 +145,5 @@ export default function Header() {
         </ul>
       </nav>
     </header>
-    <MintNft/>
-    </WalletModalProvider>
-            </WalletProvider>
-        </ConnectionProvider>
   );
 }
