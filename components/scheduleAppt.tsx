@@ -1,7 +1,7 @@
 // components/BookAppointment.tsx
 import axios from 'axios';
 import ReactDatePicker from 'react-datepicker';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 export default function BookAppointment() {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());

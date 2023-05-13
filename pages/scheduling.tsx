@@ -2,6 +2,7 @@ import { SessionProvider, GetSessionParams, getSession } from "next-auth/react"
 import Layout from "../components/layout"
 import BookAppointment from "../components/scheduleAppt"
 import AcceptAppointments from "../components/acceptAppt"
+import { useContext } from "react"
 
 interface CustomMintPageProps {
   session: any
