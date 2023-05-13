@@ -1,20 +1,16 @@
 // pages/api/bookSlot.ts
 import { NextApiRequest, NextApiResponse } from 'next';
-import  { v4 as uuidv4 } from "uuid"
+import { v4 as uuidv4 } from 'uuid';
 import { connectToDatabase } from '../../lib/dbConnect';
 import { Appointment } from '../../models/Appointment';
-import { User } from '../../models/User';
-import { useWallet } from '@solana/wallet-adapter-react';
-import { PublicKey } from '@metaplex-foundation/js';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { userId, contractorId, timeslot } = req.body;
-  const wallet = useWallet();
 
   const appointment: Appointment = {
     id: uuidv4(),
-    user: { wallet: "2", name: 'John Doe', email: "email", phone: "phone"},
-    contractor: { wallet: "2", name: 'Contractor Name', email: "email", phone: "phone" },
+    user: { wallet: '2', name: 'John Doe', email: 'email', phone: 'phone' },
+    contractor: { wallet: '2', name: 'Contractor Name', email: 'email', phone: 'phone' },
     timeslot: new Date(timeslot),
     isAccepted: false,
   };

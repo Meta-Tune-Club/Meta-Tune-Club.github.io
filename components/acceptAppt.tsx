@@ -1,3 +1,4 @@
+//components/acceptAppt.tsx
 import axios from 'axios';
 import { useEffect, useState, useContext } from 'react';
 import { Appointment } from '../models/Appointment';
