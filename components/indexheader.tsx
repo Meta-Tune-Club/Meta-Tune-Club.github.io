@@ -100,7 +100,7 @@ export default function IndexHeader() {
                 padding: '0px 0px',
             }}>
                 <nav className="navbar" style={{
-                    background: "linear-gradient(to bottom, rgb(123, 8, 255, 0.9), #8d689e)",
+                    background: "linear-gradient(to bottom, gray, #8d689e)",
                     height: '500px',
                     width: '100%',
                     position: 'absolute',  
@@ -114,8 +114,10 @@ export default function IndexHeader() {
                     left: '0px',
                     position: 'absolute'
                 }}>
-                    <a href="/">
-                    <Image src="/logo.png" width={40} height={40} alt="Logo"/>
+                    <a href="/" style={{
+                        padding: '10px 10px'
+                    }}>
+                    <Image src="/Logo.png" width={60} height={60} alt="Logo"/>
                     </a>
                 </div>
                 <div className="navbar-middle" style={{
@@ -125,6 +127,7 @@ export default function IndexHeader() {
                 }}>
                     <h1 style={{
                     color: 'Blue',
+                    opacity: '40%',
                     }}>Meta Tune Club</h1>
                 </div>
                 <div className="navbar-right" style={{
@@ -132,9 +135,8 @@ export default function IndexHeader() {
                     top: '0px',
                     right: '0px'
                 }}>
-                    <nav>
+                    <nav className="above-danav">
                         <div className="danav">
-                            <button onClick={home_handleClick}>Home</button>
                             <button onClick={protected_handleClick}>Protected API Route</button>
                             <button onClick={me_handleClick}>Me</button>
                             <button onClick={customMint_handleClick}>Custom Mint</button>

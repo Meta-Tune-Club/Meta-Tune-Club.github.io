@@ -34,6 +34,7 @@ body{
   height: 80px;
   padding: 0 20px;
   color: #fff;
+  background-size: cover;
 }
 
 .navbar-left {
@@ -58,12 +59,11 @@ button {
   font-size: 16px;
   cursor: pointer;
   color: #fff;
-  background-color: #0070f3;
-
+  background-color: purple;
 }
 
 button:hover {
-  background-color: #0366d6;
+  background-color: rgb(109, 12, 109);
 }
 
 .navbar-menu {
@@ -130,6 +130,15 @@ html{
   white-space: nowrap;
 }
 
+.above-danav{
+  padding: 6px 20px;
+  background-color: purple;
+  border-radius: 4px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 20px;
+  margin-top: 5%;
+}
+
 html{ 
-  background-color: #8d689e;
+  background-color: #A27DA9;
 }
