@@ -6,6 +6,11 @@ import { useWallet } from "@solana/wallet-adapter-react";
 interface MintNftProps {
   session: any
 }
+interface Attribute {
+  title: string;
+  description: string;
+  [key: string]: unknown;
+}
 
 
 
@@ -17,6 +22,9 @@ async function toMetaplexFileFromBrowser(file: File): Promise<MetaplexFile> {
   return toMetaplexFile(bytes, fileName);
 }
 
+function createMetaplexFile(image: File) {
+  throw new Error("Function not implemented.");
+}
 
 function MintNft({ session }: MintNftProps) {
   const connection = new Connection(clusterApiUrl('devnet'));
@@ -26,14 +34,22 @@ function MintNft({ session }: MintNftProps) {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState<File | undefined>(undefined);
+  const [attributes, setAttributes] = useState<Attribute[]>([{ title: '', description: '' }]);
+  const [newAttribute, setNewAttribute] = useState({ title: '', description: '' });
 
-  
+  const handleAddAttribute = (event: React.FormEvent) => {
+    event.preventDefault();
+    setAttributes([...attributes, newAttribute]);
+    setNewAttribute({ title: '', description: '' });
+  };
 
-  useEffect(() => {
-    if (!wallet.connected) {
-      wallet.connect();
-    }
-  }, [wallet.connected]);
+  const handleRemoveAttribute = (attributeToRemove: Attribute) => {
+    setAttributes(attributes.filter(attribute => attribute !== attributeToRemove));
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNewAttribute({ ...newAttribute, [event.target.name]: event.target.value });
+  };
 
   const handleMintNft = async () => {
     const mx = Metaplex.make(connection)
@@ -49,12 +65,10 @@ function MintNft({ session }: MintNftProps) {
       return;
     }
 
-
-
-
     const { uri, metadata } = await mx.nfts().uploadMetadata({
         name: name,
         description: description,
+        attributes:attributes,
         image: await toMetaplexFileFromBrowser(image),
       });
       
@@ -82,6 +96,25 @@ function MintNft({ session }: MintNftProps) {
           Description:
           <input type="description" value={description} onChange={(e) => setDescription(e.target.value)} />
         </label>
+        <form onSubmit={handleAddAttribute}>
+        <label>
+          Title:
+          <input type="text" name="title" value={newAttribute.title} onChange={handleChange} required />
+        </label>
+        <label>
+          Description:
+          <input type="text" name="description" value={newAttribute.description} onChange={handleChange} required />
+        </label>
+        <button type="submit">Add attribute</button>
+      </form>
+      <ul>
+        {attributes.map((attribute, index) => (
+          <li key={index}>
+            {attribute.title}: {attribute.description}
+            <button onClick={() => handleRemoveAttribute(attribute)}>Remove</button>
+          </li>
+        ))}
+      </ul>
         <label>
           Image:
           <input type="file" onChange={(e) => setImage(e.target.files?.[0])} />
@@ -103,7 +136,3 @@ function MintNft({ session }: MintNftProps) {
 }
 
 export default MintNft;
-function createMetaplexFile(image: File) {
-    throw new Error("Function not implemented.");
-}
-
