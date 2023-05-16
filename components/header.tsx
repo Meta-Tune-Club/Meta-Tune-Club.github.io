@@ -142,6 +142,11 @@ export default function Header() {
               <a>Custom Mint</a>
             </Link>
           </li>
+          <li className={styles.navItem}>
+            <Link href="/scheduling">
+              <a>Schedule Appointment</a>
+            </Link>
+          </li>
         </ul>
       </nav>
     </header>
