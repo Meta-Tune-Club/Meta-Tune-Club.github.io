@@ -19,6 +19,7 @@ import {
 import { clusterApiUrl } from '@solana/web3.js';
 import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets';
 
+
 require('@solana/wallet-adapter-react-ui/styles.css');
 
 export default function IndexHeader() {
@@ -73,9 +74,6 @@ export default function IndexHeader() {
         }
     }, [wallet.connected]);
 
-    const home_handleClick = () => {
-        window.location.href = "/";
-    };
     const me_handleClick = () => {
         window.location.href = "/me";
     };
@@ -85,6 +83,13 @@ export default function IndexHeader() {
     const customMint_handleClick = () => {
         window.location.href = "/customMint";
     };
+
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const handleMenuClick = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
+
 
     return (
         <header>
@@ -142,52 +147,67 @@ export default function IndexHeader() {
                             <button onClick={customMint_handleClick}>Custom Mint</button>
                         </div>
                     </nav>
-                    <div className={styles.signedInStatus}>
-                    <p
-                    className={`nojs-show ${
-                        !session && loading ? styles.loading : styles.loaded
-                    }`}
-                    >
-                    {!session && (
-                        <>
-                        <span className={styles.notSignedInText}>
-                            You are not signed in
-                        </span>
-                        <span className={styles.buttonPrimary} onClick={handleSignIn}>
-                            Connect Wallet
-                        </span>
-                        </>
-                    )}
-                    {session?.user && (
-                        <>
-                        {session.user.image && (
-                            <span
-                            style={{ backgroundImage: `url('${session.user.image}')` }}
-                            className={styles.avatar}
-                            />
-                        )}
-                        <span className={styles.signedInText}>
-                            <small>Signed in as</small>
-                            <br />
-                            <strong>{session.user.email ?? session.user.name}</strong>
-                        </span>
-                        <a style={{
-                            color: "white"
-                        }}
-                            href={`/api/auth/signout`}
-                            className={styles.button}
-                            onClick={(e) => {
-                            e.preventDefault();
-                            signOut();
+                    <div>
+                        <div
+                            className={`nojs-show ${
+                                !session && loading ? styles.loading : styles.loaded
+                            }`} style={{
+                                backgroundColor: 'rgb(0, 0, 0, 0)'
                             }}
                         >
-                            Sign out
-                        </a>
-                        </>
-                    )}
-                    </p>
+                        {!session && (
+                            
+                            <>
+                            <div className="above-danav">
+                                <div className="danav">
+                                    <button onClick={handleSignIn}>
+                                        Connect Wallet
+                                    </button>
+                                </div>
+                            </div>
+                            </>
+                        )}
+                        {session?.user && (
+                            <>
+                            <div className="above-danav">
+                                {session.user.image && (
+                                    <span
+                                        style={{ backgroundImage: 'url(/Logo.png)'}}
+                                    />
+                                )}
+                                <button onClick={handleMenuClick}>
+                                    <strong>
+                                        {session.user.email ?? session.user.name}
+                                    </strong>
+                                </button>
+                            </div>
+                            </>
+                        )}
+                        </div>
                     </div>
                 </div>
+                {isMenuOpen && (
+                                <div className="navbar-menu" style={{
+                                    marginTop: '100px',
+                                }}>
+                                    <ul>
+                                        <button style={{
+                                            color: "white"
+                                        }}
+                                            href={`/api/auth/signout`}
+                                            onClick={(e) => {
+                                            e.preventDefault();
+                                            signOut();
+                                            }}>
+                                            Sign out
+                                        </button>
+                                        <br></br>
+                                        <button>Text</button>
+                                        <br></br>
+                                        <button>Text</button>
+                                    </ul>
+                                </div>
+                            )}
             </nav>
         </header>
     );

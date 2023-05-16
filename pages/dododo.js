@@ -82,3 +82,8 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
+
+
+
+className={styles.avatar}
