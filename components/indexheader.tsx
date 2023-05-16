@@ -194,7 +194,7 @@ export default function IndexHeader() {
                                         <button style={{
                                             color: "white"
                                         }}
-                                            ref={`/api/auth/signout`}
+                                            href={`/api/auth/signout`}
                                             onClick={(e) => {
                                             e.preventDefault();
                                             signOut();
