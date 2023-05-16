@@ -48,7 +48,7 @@ export default function Header() {
       const message = new SigninMessage({
         domain: window.location.host,
         publicKey: wallet.publicKey?.toBase58(),
-        statement: `Sign this message to sign in to the app.`,
+        statement: `Please Approve This Signature To Login`,
         nonce: csrf,
       });
 
