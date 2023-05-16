@@ -86,4 +86,4 @@ export default HomePage;
 
 
 
-className={styles.avatar}
+const className={styles,avatar}
