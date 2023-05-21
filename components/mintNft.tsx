@@ -7,12 +7,15 @@ interface MintNftProps {
   session: any
 }
 interface Attribute {
-  title: string;
-  description: string;
-  [key: string]: unknown;
+  trait_type: string;
+  value: string | number;
+  key: string;
 }
 
-
+interface AttributeInput {
+  trait_type: string;
+  value: string;
+}
 
 async function toMetaplexFileFromBrowser(file: File): Promise<MetaplexFile> {
   const ext = file.type.split("/").pop();
@@ -34,22 +37,7 @@ function MintNft({ session }: MintNftProps) {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState<File | undefined>(undefined);
-  const [attributes, setAttributes] = useState<Attribute[]>([{ title: '', description: '' }]);
-  const [newAttribute, setNewAttribute] = useState({ title: '', description: '' });
 
-  const handleAddAttribute = (event: React.FormEvent) => {
-    event.preventDefault();
-    setAttributes([...attributes, newAttribute]);
-    setNewAttribute({ title: '', description: '' });
-  };
-
-  const handleRemoveAttribute = (attributeToRemove: Attribute) => {
-    setAttributes(attributes.filter(attribute => attribute !== attributeToRemove));
-  };
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNewAttribute({ ...newAttribute, [event.target.name]: event.target.value });
-  };
 
   const handleMintNft = async () => {
     const mx = Metaplex.make(connection)
@@ -96,25 +84,7 @@ function MintNft({ session }: MintNftProps) {
           Description:
           <input type="description" value={description} onChange={(e) => setDescription(e.target.value)} />
         </label>
-        <form onSubmit={handleAddAttribute}>
-        <label>
-          Title:
-          <input type="text" name="title" value={newAttribute.title} onChange={handleChange} required />
-        </label>
-        <label>
-          Description:
-          <input type="text" name="description" value={newAttribute.description} onChange={handleChange} required />
-        </label>
-        <button type="submit">Add attribute</button>
-      </form>
-      <ul>
-        {attributes.map((attribute, index) => (
-          <li key={index}>
-            {attribute.title}: {attribute.description}
-            <button onClick={() => handleRemoveAttribute(attribute)}>Remove</button>
-          </li>
-        ))}
-      </ul>
+
         <label>
           Image:
           <input type="file" onChange={(e) => setImage(e.target.files?.[0])} />
