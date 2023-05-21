@@ -7,12 +7,10 @@ interface MintNftProps {
   session: any
 }
 interface Attribute {
-  title: string;
+  trait_type: string;
   description: string;
   [key: string]: unknown;
 }
-
-
 
 async function toMetaplexFileFromBrowser(file: File): Promise<MetaplexFile> {
   const ext = file.type.split("/").pop();
@@ -48,8 +46,12 @@ function MintNft({ session }: MintNftProps) {
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNewAttribute({ ...newAttribute, [event.target.name]: event.target.value });
+    setNewAttribute((prevAttribute) => ({
+      ...prevAttribute,
+      [event.target.name]: event.target.value,
+    }));
   };
+  
 
   const handleMintNft = async () => {
     const mx = Metaplex.make(connection)
@@ -72,7 +74,7 @@ function MintNft({ session }: MintNftProps) {
         image: await toMetaplexFileFromBrowser(image),
       });
       
-      console.log(metadata.image); // prints the URI of the uploaded image
+      console.log(metadata.image); // prints the URI of the uploaded image ROAR
       
 
     console.log(uri);

@@ -187,27 +187,27 @@ export default function IndexHeader() {
                     </div>
                 </div>
                 {isMenuOpen && (
-                                <div className="navbar-menu" style={{
-                                    marginTop: '100px',
-                                }}>
-                                    <ul>
-                                        <button style={{
-                                            color: "white"
-                                        }}
+                    <div className="navbar-menu" style={{
+                        marginTop: '100px',
+                    }}>
+                        <ul>
+                            <button style={{
+                                color: "white"
+                            }}
                                             
-                                            onClick={(e) => {
-                                            e.preventDefault();
-                                            signOut();
-                                            }}>
-                                            Sign out
-                                        </button>
-                                        <br></br>
-                                        <button>Text</button>
-                                        <br></br>
-                                        <button>Text</button>
-                                    </ul>
-                                </div>
-                            )}
+                                onClick={(e) => {
+                                e.preventDefault();
+                                signOut();
+                                }}>
+                                    Sign out
+                                </button>
+                                <br></br>
+                                <button>Text</button>
+                                <br></br>
+                                <button>Text</button>
+                            </ul>
+                    </div>
+                )}
             </nav>
         </header>
     );
