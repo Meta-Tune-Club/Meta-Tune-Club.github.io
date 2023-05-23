@@ -8,9 +8,10 @@ interface MintNftProps {
 }
 interface Attribute {
   trait_type: string;
-  description: string;
-  [key: string]: unknown;
+  value: string;
+  key?: string;
 }
+
 
 async function toMetaplexFileFromBrowser(file: File): Promise<MetaplexFile> {
   const ext = file.type.split("/").pop();
@@ -28,30 +29,33 @@ function MintNft({ session }: MintNftProps) {
   const connection = new Connection(clusterApiUrl('devnet'));
   const wallet = useWallet();
   const [nftMinted, setNftMinted] = useState(false);
-
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState<File | undefined>(undefined);
-  const [attributes, setAttributes] = useState<Attribute[]>([{ title: '', description: '' }]);
-  const [newAttribute, setNewAttribute] = useState({ title: '', description: '' });
 
-  const handleAddAttribute = (event: React.FormEvent) => {
-    event.preventDefault();
-    setAttributes([...attributes, newAttribute]);
-    setNewAttribute({ title: '', description: '' });
+//declares and sets attributes based on the Attribute interface and allows the users to set the value trait type and key
+  const [attributes, setAttributes] = useState<Attribute[]>([
+    {
+      trait_type: '',
+      value: '',
+      key: '',
+    }]);
+//allows the user to add more attributes
+  const addAttribute = () => {
+    setAttributes([...attributes, {
+      trait_type: '',
+      value: '',
+      key: '',
+    }]);
   };
-
-  const handleRemoveAttribute = (attributeToRemove: Attribute) => {
-    setAttributes(attributes.filter(attribute => attribute !== attributeToRemove));
-  };
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNewAttribute((prevAttribute) => ({
-      ...prevAttribute,
-      [event.target.name]: event.target.value,
-    }));
+//allows the user to remove attributes
+  const removeAttribute = (index: number) => {
+    const newAttributes = [...attributes];
+    newAttributes.splice(index, 1);
+    setAttributes(newAttributes);
   };
   
+    
 
   const handleMintNft = async () => {
     const mx = Metaplex.make(connection)
@@ -67,10 +71,15 @@ function MintNft({ session }: MintNftProps) {
       return;
     }
 
+    const formattedAttributes = attributes.map((attribute) => ({
+      trait_type: attribute.trait_type,
+      value: attribute.value,
+    }));
+
     const { uri, metadata } = await mx.nfts().uploadMetadata({
         name: name,
         description: description,
-        attributes:attributes,
+        attributes:formattedAttributes,
         image: await toMetaplexFileFromBrowser(image),
       });
       
@@ -98,29 +107,42 @@ function MintNft({ session }: MintNftProps) {
           Description:
           <input type="description" value={description} onChange={(e) => setDescription(e.target.value)} />
         </label>
-        <form onSubmit={handleAddAttribute}>
-        <label>
-          Title:
-          <input type="text" name="title" value={newAttribute.title} onChange={handleChange} required />
-        </label>
-        <label>
-          Description:
-          <input type="text" name="description" value={newAttribute.description} onChange={handleChange} required />
-        </label>
-        <button type="submit">Add attribute</button>
-      </form>
-      <ul>
-        {attributes.map((attribute, index) => (
-          <li key={index}>
-            {attribute.title}: {attribute.description}
-            <button onClick={() => handleRemoveAttribute(attribute)}>Remove</button>
-          </li>
-        ))}
-      </ul>
+
         <label>
           Image:
           <input type="file" onChange={(e) => setImage(e.target.files?.[0])} />
         </label>
+        {attributes.map((attribute, index) => (
+          <div key={index}>
+            <label>
+              Trait Type:
+              <input type="text" value={attribute.trait_type} onChange={(e) => {
+                const newAttributes = [...attributes];
+                newAttributes[index].trait_type = e.target.value;
+                setAttributes(newAttributes);
+              }} />
+            </label>
+            <label>
+              Value:
+              <input type="text" value={attribute.value} onChange={(e) => {
+                const newAttributes = [...attributes];
+                newAttributes[index].value = e.target.value;
+                setAttributes(newAttributes);
+              }} />
+            </label>
+            <label>
+              Key:
+              <input type="text" value={attribute.key} onChange={(e) => {
+                const newAttributes = [...attributes];
+                newAttributes[index].key = e.target.value;
+                setAttributes(newAttributes);
+              }} />
+            </label>
+            <button onClick={() => removeAttribute(index)}>Remove</button>
+          </div>
+        ))}
+        <button onClick={addAttribute}>Add Attribute</button>
+
         
       {session ? (
         <div>
