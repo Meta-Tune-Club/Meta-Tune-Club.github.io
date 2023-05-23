@@ -28,7 +28,6 @@ model users {
   email               String  @unique(map: "email") @db.VarChar(255)
   job                 String? @unique(map: "job") @db.VarChar(255)
   phone               String  @unique(map: "phone") @db.VarChar(255)
-  address             String  @unique(map: "address") @db.VarChar(255)
   verification_string String  @db.VarChar(255)
+  address             String  @unique(map: "address") @db.VarChar(255)
 }
-
