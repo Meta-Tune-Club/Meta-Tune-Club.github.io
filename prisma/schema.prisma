@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model appointments {
+  id            String    @id @db.VarChar(255)
+  user_id       String?   @db.VarChar(255)
+  contractor_id String?   @db.VarChar(255)
+  timeslot      DateTime? @db.DateTime(0)
+  is_accepted   Boolean?
+}
+
+model tenant_configs {
+  id                  Int     @id @default(autoincrement())
+  user_id             String  @unique(map: "user_id") @db.VarChar(255)
+  custom_domain       String? @unique(map: "custom_domain") @db.VarChar(255)
+  verification_string String  @db.VarChar(255)
+}
+
+model users {
+  id                  Int     @id @default(autoincrement())
+  wallet              String  @unique(map: "wallet") @db.VarChar(255)
+  email               String  @unique(map: "email") @db.VarChar(255)
+  job                 String? @unique(map: "job") @db.VarChar(255)
+  phone               String  @unique(map: "phone") @db.VarChar(255)
+  verification_string String  @db.VarChar(255)
+  address             String  @unique(map: "address") @db.VarChar(255)
+}

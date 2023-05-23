@@ -37,6 +37,7 @@ function Navbar() {
 						<Link href="https://meta-tune-club-staking.vercel.app/">Stake</Link>
 						<Link href="/About">About</Link>
 						<Link href="/CustomMint">Custom Mint</Link>
+						<Link href="/UserInfo">Account Setup</Link>
 					<button
 						className="nav-btn nav-close-btn"
 						onClick={showNavbar}>
