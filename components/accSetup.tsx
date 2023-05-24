@@ -50,7 +50,19 @@ export default function AccSetup({ session } : AccSetupProps) {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
-                <input type="text" placeholder="Role" value={job} onChange={(e) => setJob(e.target.value)}  />
+                <input
+                    type="text"
+                    placeholder="Phone Number"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                />
+                <input
+                    type="text"
+                    placeholder="Address"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                />
+                <input type="text" placeholder="Job" value={job} onChange={(e) => setJob(e.target.value)}  />
                 <button onClick={save}>Save</button>
 
 
