@@ -5,8 +5,9 @@ interface users {
     id: number;
     name: string;
     email: string;
-    role: string;
+    job: string;
     walletAddress: string;
+    address: string;
 }
 
 interface AccSetupProps {
@@ -18,7 +19,9 @@ export default function AccSetup({ session } : AccSetupProps) {
     const wallet = useWallet();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
-    const [role, setRole] = useState("");
+    const [job, setJob] = useState("");
+    const [phone, setPhone] = useState("");
+    const [address, setAddress] = useState("");
     const walletAddress = wallet.publicKey?.toBase58();
 
 //saves to the planetscale database using users interface
@@ -26,7 +29,7 @@ export default function AccSetup({ session } : AccSetupProps) {
         e.preventDefault();
         const res = await fetch("/api/users", {
             method: "POST",
-            body: JSON.stringify({ name, email, role, walletAddress }),
+            body: JSON.stringify({ name, email, job, walletAddress, phone, address }),
         });
         const data = await res.json();
         console.log(data);
@@ -47,7 +50,7 @@ export default function AccSetup({ session } : AccSetupProps) {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
-                <input type="text" placeholder="Role" value={role} onChange={(e) => setRole(e.target.value)}  />
+                <input type="text" placeholder="Role" value={job} onChange={(e) => setJob(e.target.value)}  />
                 <button onClick={save}>Save</button>
 
 
