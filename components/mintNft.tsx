@@ -83,7 +83,7 @@ function MintNft({ session }: MintNftProps) {
         image: await toMetaplexFileFromBrowser(image),
       });
       
-      console.log(metadata.image); // prints the URI of the uploaded image
+      console.log(metadata.image); // prints the URI of the uploaded image ROAR
       
 
     console.log(uri);
