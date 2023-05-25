@@ -1,13 +1,6 @@
+//components/accSetup.tsx
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useEffect, useState } from "react";
-
-interface users {
-    id: number;
-    name: string;
-    email: string;
-    role: string;
-    walletAddress: string;
-}
 
 interface AccSetupProps {
     session: any
@@ -16,19 +9,35 @@ interface AccSetupProps {
 //makes a function where the user can save account information following the users interface and saving it in planetscale database
 export default function AccSetup({ session } : AccSetupProps) {
     const wallet = useWallet();
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [role, setRole] = useState("");
-    const walletAddress = wallet.publicKey?.toBase58();
+    const [Name, setName] = useState("");
+    const [Email, setEmail] = useState("");
+    const [Job, setJob] = useState("");
+    const [Phone, setPhone] = useState("");
+    const [Address, setAddress] = useState("");
+
+    const saveForm = async (e: any) => {
+        const WalletAddress = wallet.publicKey?.toBase58();
+        const users = {
+          name: Name,
+          email: Email,
+          job: Job,
+          walletAddress: WalletAddress,
+          phone: Phone,
+          address: Address,
+          verification_string: "0",
+        };
+        save(e, users);
+      };
+      
 
 //saves to the planetscale database using users interface
-    const save = async (e: any) => {
+    const save = async (e: any, users: any) => {
         e.preventDefault();
-        const res = await fetch("/api/users", {
+        const req = await fetch("/api/users", {
             method: "POST",
-            body: JSON.stringify({ name, email, role, walletAddress }),
+            body: JSON.stringify(users),
         });
-        const data = await res.json();
+        const data = await req.json();
         console.log(data);
     };
 
@@ -38,20 +47,29 @@ export default function AccSetup({ session } : AccSetupProps) {
                 <input
                     type="text"
                     placeholder="Name"
-                    value={name}
+                    value={Name}
                     onChange={(e) => setName(e.target.value)}
                 />
                 <input
                     type="text"
                     placeholder="Email"
-                    value={email}
+                    value={Email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
-                <input type="text" placeholder="Role" value={role} onChange={(e) => setRole(e.target.value)}  />
-                <button onClick={save}>Save</button>
-
-
-
+                <input
+                    type="text"
+                    placeholder="Phone Number"
+                    value={Phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                />
+                <input
+                    type="text"
+                    placeholder="Address"
+                    value={Address}
+                    onChange={(e) => setAddress(e.target.value)}
+                />
+                <input type="text" placeholder="Job" value={Job} onChange={(e) => setJob(e.target.value)}  />
+                <button onClick={saveForm}>Save</button>
             </form>
         </div>
     );

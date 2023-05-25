@@ -84,6 +84,10 @@ export default function IndexHeader() {
         window.location.href = "/customMint";
     };
 
+    const userInfo_handleClick = () => {
+        window.location.href = "/UserInfo";
+    };
+
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const handleMenuClick = () => {
@@ -142,9 +146,9 @@ export default function IndexHeader() {
                 }}>
                     <nav className="above-danav">
                         <div className="danav">
-                            <button onClick={protected_handleClick}>Protected API Route</button>
                             <button onClick={me_handleClick}>Me</button>
                             <button onClick={customMint_handleClick}>Custom Mint</button>
+                            <button onClick={userInfo_handleClick}>User Info</button>
                         </div>
                     </nav>
                     <div>

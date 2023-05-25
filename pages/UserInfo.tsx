@@ -1,3 +1,4 @@
+//pages/UserInfo.tsx
 import { SessionProvider, GetSessionParams, getSession } from "next-auth/react"
 import AccSetup from "../components/accSetup"
 import Layout from "../components/layout"
