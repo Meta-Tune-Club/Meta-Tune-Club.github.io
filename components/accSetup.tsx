@@ -1,7 +1,6 @@
 //components/accSetup.tsx
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 
 interface AccSetupProps {
     session: any
@@ -9,7 +8,6 @@ interface AccSetupProps {
 
 //makes a function where the user can save account information following the users interface and saving it in planetscale database
 export default function AccSetup({ session } : AccSetupProps) {
-    const router = useRouter();
     const wallet = useWallet();
     const [Name, setName] = useState("");
     const [Email, setEmail] = useState("");
