@@ -17,4 +17,5 @@ async function saveUser(req: NextApiRequest, res: NextApiResponse) {
         } as unknown as Prisma.usersCreateInput,
     });
     res.status(200).json(result);
+    await prisma.$disconnect();
 }
