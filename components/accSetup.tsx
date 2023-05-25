@@ -1,15 +1,7 @@
 //components/accSetup.tsx
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useEffect, useState } from "react";
-
-interface users {
-    id: number;
-    name: string;
-    email: string;
-    job: string;
-    walletAddress: string;
-    address: string;
-}
+import { useRouter } from "next/router";
 
 interface AccSetupProps {
     session: any
@@ -17,17 +9,31 @@ interface AccSetupProps {
 
 //makes a function where the user can save account information following the users interface and saving it in planetscale database
 export default function AccSetup({ session } : AccSetupProps) {
+    const router = useRouter();
     const wallet = useWallet();
     const [Name, setName] = useState("");
     const [Email, setEmail] = useState("");
     const [Job, setJob] = useState("");
     const [Phone, setPhone] = useState("");
     const [Address, setAddress] = useState("");
-    const WalletAddress = wallet.publicKey?.toBase58();
-    const users = { Name, Email, Job, WalletAddress, Phone, Address };
+
+    const saveForm = async (e: any) => {
+        const WalletAddress = wallet.publicKey?.toBase58();
+        const users = {
+          name: Name,
+          email: Email,
+          job: Job,
+          walletAddress: WalletAddress,
+          phone: Phone,
+          address: Address,
+          verification_string: "0",
+        };
+        save(e, users);
+      };
+      
 
 //saves to the planetscale database using users interface
-    const save = async (e: any) => {
+    const save = async (e: any, users: any) => {
         e.preventDefault();
         const req = await fetch("/api/users", {
             method: "POST",
@@ -65,7 +71,7 @@ export default function AccSetup({ session } : AccSetupProps) {
                     onChange={(e) => setAddress(e.target.value)}
                 />
                 <input type="text" placeholder="Job" value={Job} onChange={(e) => setJob(e.target.value)}  />
-                <button onClick={save}>Save</button>
+                <button onClick={saveForm}>Save</button>
             </form>
         </div>
     );
