@@ -106,7 +106,7 @@ export default function IndexHeader() {
             }}>
                 <nav className="navbar" style={{
                     background: "linear-gradient(to bottom, gray, #8d689e)",
-                    height: '500px',
+                    height: '200px',
                     width: '100%',
                     position: 'absolute',  
                     padding: '0px 0px',
