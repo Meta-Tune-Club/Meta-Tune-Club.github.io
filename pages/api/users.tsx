@@ -2,6 +2,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { Prisma, PrismaClient } from "@prisma/client";
 import { walletAdapterIdentity } from "@metaplex-foundation/js";
+import { error } from "console";
 
 
 //users.tsx function: 
@@ -9,18 +10,9 @@ export default async function saveUser(req: NextApiRequest, res: NextApiResponse
     const prisma = new PrismaClient();
   
     try {
-      const { name, email, job, walletAddress, phone, address } = req.body;
-  
+      const users = JSON.parse(req.body);
       const result = await prisma.users.create({
-        data: {
-          name: name,
-          email:email,
-          job:job,
-          walletAddress:walletAddress,
-          phone:phone,
-          address: address,
-          verification_string: "4", // Add the verification string value here
-        } as unknown as Prisma.usersUncheckedCreateInput,
+        data: users,
       });
   
       res.status(200).json(result);

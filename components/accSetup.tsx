@@ -1,6 +1,7 @@
 //components/accSetup.tsx
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useEffect, useState } from "react";
+import { Prisma } from "@prisma/client";
 
 interface AccSetupProps {
     session: any
@@ -14,19 +15,24 @@ export default function AccSetup({ session } : AccSetupProps) {
     const [Job, setJob] = useState("");
     const [Phone, setPhone] = useState("");
     const [Address, setAddress] = useState("");
+    const [currentStep, setCurrentStep] = useState(0);
+
+    const nextStep = () =>{
+        
+    }
 
     const saveForm = async (e: any) => {
-        const WalletAddress = wallet.publicKey?.toBase58();
+        const WalletAddress = session.user.name;
         const users = {
-          name: Name,
-          email: Email,
-          job: Job,
-          walletAddress: WalletAddress,
-          phone: Phone,
-          address: Address,
-          verification_string: "0",
-        };
-        save(e, users);
+            name: Name,
+            email: Email,
+            job: Job,
+            walletAddress: WalletAddress,
+            phone: Phone,
+            address: Address,
+            verification_string: "verified",
+        } as Prisma.usersCreateInput;
+        save(e, JSON.stringify(users));
       };
       
 
@@ -35,10 +41,11 @@ export default function AccSetup({ session } : AccSetupProps) {
         e.preventDefault();
         const req = await fetch("/api/users", {
             method: "POST",
-            body: JSON.stringify(users),
+            body: (users),
         });
         const data = await req.json();
         console.log(data);
+        
     };
 
     return(
