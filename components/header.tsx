@@ -22,7 +22,7 @@ import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets';
 
 require('@solana/wallet-adapter-react-ui/styles.css');
 
-export default function IndexHeader() {
+export default function Header() {
     const network = WalletAdapterNetwork.Devnet;
     const endpoint = useMemo(() => clusterApiUrl(network), [network])
     const { data: session, status } = useSession();
@@ -124,16 +124,6 @@ export default function IndexHeader() {
                     }}>
                     <Image src="/Logo.png" width={60} height={60} alt="Logo"/>
                     </a>
-                </div>
-                <div className="navbar-middle" style={{
-                    position: 'absolute',
-                    left: '50%',
-                    transform: 'translateX(-50%)'
-                }}>
-                    <h1 style={{
-                    color: 'Blue',
-                    opacity: '40%',
-                    }}>Meta Tune Club</h1>
                 </div>
                 <div className="navbar-right" style={{
                     position: 'absolute',

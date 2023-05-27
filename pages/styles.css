@@ -138,3 +138,37 @@ a:hover {
 html{ 
   background-color: #A27DA9;
 }
+
+input{
+  background-color: white;
+  border: dashed blue;
+  border-width: 7px;
+  border-radius: 4px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 20px;
+  margin-top: 1rem;
+}
+
+.drop-zone {
+  width: 300px;
+  height: 300px;
+  border: 2px dashed #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.drop-zone.drag-over {
+  border-color: #555;
+}
+
+.drop-zone img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.DAlogo{
+  
+}

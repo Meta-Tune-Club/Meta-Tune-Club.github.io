@@ -2,6 +2,8 @@ import { Metaplex, walletAdapterIdentity, bundlrStorage, toMetaplexFile, Metaple
 import { clusterApiUrl, Connection } from "@solana/web3.js";
 import { useEffect, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
+import ImageDropZone from './ImageDropZone';
+
 
 interface MintNftProps {
   session: any
@@ -98,10 +100,13 @@ function MintNft({ session }: MintNftProps) {
   }; 
 
   return (
-    <div>
+    <div style={{
+      backgroundColor: '#A27DA9',
+    }}>
         <label>
           Name:
-          <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+          <input style={{
+          }} type="text" value={name} onChange={(e) => setName(e.target.value)} />
         </label>
         <label>
           Description:
@@ -110,6 +115,10 @@ function MintNft({ session }: MintNftProps) {
 
         <label>
           Image:
+          <div>
+          <h1>Image Drop Zone</h1>
+          <ImageDropZone />
+        </div>
           <input type="file" onChange={(e) => setImage(e.target.files?.[0])} />
         </label>
         {attributes.map((attribute, index) => (

@@ -22,7 +22,7 @@ import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets';
 
 require('@solana/wallet-adapter-react-ui/styles.css');
 
-export default function IndexHeader() {
+export default function Footer() {
     const network = WalletAdapterNetwork.Devnet;
     const endpoint = useMemo(() => clusterApiUrl(network), [network])
     const { data: session, status } = useSession();
@@ -84,10 +84,6 @@ export default function IndexHeader() {
         window.location.href = "/customMint";
     };
 
-    const userInfo_handleClick = () => {
-        window.location.href = "/UserInfo";
-    };
-
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const handleMenuClick = () => {
@@ -97,30 +93,18 @@ export default function IndexHeader() {
 
     return (
         <header>
-            <noscript>
-                <style>{`.nojs-show { opacity: 1; top: 0; }`}</style>
-            </noscript>
             <nav className="navbar" style={{
                 width: 'auto',
                 maxWidth: '100%',
-                backgroundImage: 'url(/Office-01_1256.png)',
-                height: '500px',
+                backgroundColor: 'black',
+                height: '200px',
                 position: "relative",
                 padding: '0px 0px',
             }}>
-                
                 <div className="navbar-left" style={{
-                    top: '0px',
                     left: '0px',
                     position: 'absolute'
                 }}>
-                    <a href="/" style={{
-                        padding: '10px 10px'
-                    }}>
-                        <div className='DAlogo'>
-                            <Image src="/Logo.png" width={60} height={60} alt="Logo"/>
-                        </div>
-                    </a>
                 </div>
                 <div className="navbar-middle" style={{
                     position: 'absolute',
@@ -129,82 +113,13 @@ export default function IndexHeader() {
                 }}>
                     <h1 style={{
                     color: 'Blue',
-                    opacity: '40%',
-                    }}>Meta Tune Club</h1>
+                    }}>Footer</h1>
                 </div>
                 <div className="navbar-right" style={{
                     position: 'absolute',
-                    top: '0px',
                     right: '0px'
-                }}>
-                    <nav className="above-danav">
-                        <div className="danav">
-                            <button onClick={me_handleClick}>Me</button>
-                            <button onClick={customMint_handleClick}>Custom Mint</button>
-                            <button onClick={userInfo_handleClick}>User Info</button>
-                        </div>
-                    </nav>
-                    <div>
-                        <div
-                            className={`nojs-show ${
-                                !session && loading ? styles.loading : styles.loaded
-                            }`} style={{
-                                backgroundColor: 'rgb(0, 0, 0, 0)'
-                            }}
-                        >
-                        {!session && (
-                            
-                            <>
-                            <div className="above-danav">
-                                <div className="danav">
-                                    <button onClick={handleSignIn}>
-                                        Connect Wallet
-                                    </button>
-                                </div>
-                            </div>
-                            </>
-                        )}
-                        {session?.user && (
-                            <>
-                            <div className="above-danav">
-                                {session.user.image && (
-                                    <span
-                                        style={{ backgroundImage: 'url(/Logo.png)'}}
-                                    />
-                                )}
-                                <button onClick={handleMenuClick}>
-                                    <strong>
-                                        {session.user.email ?? session.user.name}
-                                    </strong>
-                                </button>
-                            </div>
-                            </>
-                        )}
-                        </div>
-                    </div>
+                }}>   
                 </div>
-                {isMenuOpen && (
-                    <div className="navbar-menu" style={{
-                        marginTop: '100px',
-                    }}>
-                        <ul>
-                            <button style={{
-                                color: "white"
-                            }}
-                                            
-                                onClick={(e) => {
-                                e.preventDefault();
-                                signOut();
-                                }}>
-                                    Sign out
-                                </button>
-                                <br></br>
-                                <button>Text</button>
-                                <br></br>
-                                <button>Text</button>
-                            </ul>
-                    </div>
-                )}
             </nav>
         </header>
     );
