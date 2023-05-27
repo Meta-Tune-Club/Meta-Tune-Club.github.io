@@ -15,6 +15,11 @@ export default function AccSetup({ session } : AccSetupProps) {
     const [Job, setJob] = useState("");
     const [Phone, setPhone] = useState("");
     const [Address, setAddress] = useState("");
+    const [currentStep, setCurrentStep] = useState(0);
+
+    const nextStep = () =>{
+        
+    }
 
     const saveForm = async (e: any) => {
         const WalletAddress = session.user.name;

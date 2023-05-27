@@ -26,7 +26,7 @@ function createMetaplexFile(image: File) {
 }
 
 function MintNft({ session }: MintNftProps) {
-  const connection = new Connection(clusterApiUrl('devnet'));
+  const connection = new Connection(clusterApiUrl('mainnet-beta'));
   const wallet = useWallet();
   const [nftMinted, setNftMinted] = useState(false);
   const [name, setName] = useState('');
@@ -61,8 +61,8 @@ function MintNft({ session }: MintNftProps) {
     const mx = Metaplex.make(connection)
       .use(walletAdapterIdentity(wallet));
     mx.use(bundlrStorage({
-      address: 'https://devnet.bundlr.network',
-      providerUrl: 'https://api.devnet.solana.com',
+      address: 'https://node1.bundlr.network',
+      providerUrl: 'https://api.mainnet-beta.solana.com',
       timeout: 60000,
     }));
 

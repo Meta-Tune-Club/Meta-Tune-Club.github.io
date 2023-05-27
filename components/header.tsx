@@ -23,7 +23,7 @@ import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets';
 require('@solana/wallet-adapter-react-ui/styles.css');
 
 export default function IndexHeader() {
-    const network = WalletAdapterNetwork.Devnet;
+    const network = WalletAdapterNetwork.Mainnet;
     const endpoint = useMemo(() => clusterApiUrl(network), [network])
     const { data: session, status } = useSession();
     const loading = status === "loading";
