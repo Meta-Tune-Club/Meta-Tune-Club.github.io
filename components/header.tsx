@@ -77,11 +77,14 @@ export default function IndexHeader() {
     const me_handleClick = () => {
         window.location.href = "/me";
     };
-    const protected_handleClick = () => {
-        window.location.href = "/api/examples/protected";
-    };
     const customMint_handleClick = () => {
         window.location.href = "/customMint";
+    };
+    const home_handleClick = () => {
+        window.location.href = "/";
+    };
+    const userInfo_handleClick = () => {
+        window.location.href = "/UserInfo";
     };
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -142,8 +145,10 @@ export default function IndexHeader() {
                 }}>
                     <nav className="above-danav">
                         <div className="danav">
+                            <button onClick={home_handleClick}>Home</button>
                             <button onClick={me_handleClick}>Me</button>
                             <button onClick={customMint_handleClick}>Custom Mint</button>
+                            <button onClick={userInfo_handleClick}>User Info</button>
                         </div>
                     </nav>
                     <div>
