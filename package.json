@@ -7,7 +7,6 @@
   },
   "dependencies": {
     "@metaplex-foundation/js": "^0.19.3",
-    "@nx/next-router": "^1.4.2",
     "@planetscale/database": "^1.7.0",
     "@prisma/client": "^4.14.1",
     "@solana-mobile/wallet-adapter-mobile": "^0.0.1-alpha.5",
