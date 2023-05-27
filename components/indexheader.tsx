@@ -77,6 +77,9 @@ export default function IndexHeader() {
     const me_handleClick = () => {
         window.location.href = "/me";
     };
+    const home_handleClick = () => {
+        window.location.href = "/";
+    };
     const protected_handleClick = () => {
         window.location.href = "/api/examples/protected";
     };
@@ -146,6 +149,7 @@ export default function IndexHeader() {
                 }}>
                     <nav className="above-danav">
                         <div className="danav">
+                            <button onClick={home_handleClick}>Home</button>
                             <button onClick={me_handleClick}>Me</button>
                             <button onClick={customMint_handleClick}>Custom Mint</button>
                             <button onClick={userInfo_handleClick}>User Info</button>
