@@ -40,14 +40,14 @@ function MintNft({ session }: MintNftProps) {
     {
       trait_type: '',
       value: '',
-      key: '',
+      key: "0",
     }]);
 //allows the user to add more attributes
   const addAttribute = () => {
     setAttributes([...attributes, {
       trait_type: '',
       value: '',
-      key: '',
+      key: "0",
     }]);
   };
 //allows the user to remove attributes
@@ -139,14 +139,7 @@ function MintNft({ session }: MintNftProps) {
                 setAttributes(newAttributes);
               }} />
             </label>
-            <label>
-              Key:
-              <input type="text" value={attribute.key} onChange={(e) => {
-                const newAttributes = [...attributes];
-                newAttributes[index].key = e.target.value;
-                setAttributes(newAttributes);
-              }} />
-            </label>
+            
             <button onClick={() => removeAttribute(index)}>Remove</button>
           </div>
         ))}

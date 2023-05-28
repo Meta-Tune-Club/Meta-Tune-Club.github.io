@@ -8,19 +8,14 @@ datasource db {
 }
 
 model appointments {
-  id            String    @id @db.VarChar(255)
-  user_id       String?   @db.VarChar(255)
-  contractor_id String?   @db.VarChar(255)
-  timeslot      DateTime? @db.DateTime(0)
-  is_accepted   Boolean?
+  id                Int     @id @default(autoincrement())
+  user_wallet       String   @db.VarChar(255)
+  contractor_wallet String?   @db.VarChar(255)
+  timeslot          DateTime @db.DateTime(0)
+  is_accepted       Boolean
 }
 
-model tenant_configs {
-  id                  Int     @id @default(autoincrement())
-  user_id             String  @unique(map: "user_id") @db.VarChar(255)
-  custom_domain       String? @unique(map: "custom_domain") @db.VarChar(255)
-  verification_string String  @db.VarChar(255)
-}
+
 
 model users {
   id                  Int     @id @default(autoincrement())
@@ -32,3 +27,4 @@ model users {
   verification_string String  @db.VarChar(255)
   address             String  
 }
+
