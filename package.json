@@ -15,15 +15,17 @@
     "@solana/wallet-adapter-react-ui": "^0.9.10",
     "@solana/wallet-adapter-wallets": "^0.16.8",
     "@solana/web3.js": "^1.76.0",
+    "@stripe/stripe-js": "^1.53.0",
     "bs58": "^5.0.0",
     "dotenv": "^16.0.3",
     "mongodb": "^5.5.0",
     "mysql2": "^3.3.1",
-    "next": "^13.4.3",
+    "next": "^13.4.4",
     "next-auth": "latest",
     "react": "^18.2.0",
     "react-datepicker": "^4.11.0",
     "react-dom": "^18.2.0",
+    "stripe": "^12.7.0",
     "tweetnacl": "^1.0.3"
   },
   "devDependencies": {
