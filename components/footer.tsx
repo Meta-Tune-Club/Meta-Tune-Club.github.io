@@ -96,7 +96,7 @@ export default function Footer() {
             <nav className="navbar" style={{
                 width: 'auto',
                 maxWidth: '100%',
-                backgroundColor: 'black',
+                backgroundColor: '#01095E',
                 height: '200px',
                 position: "relative",
                 padding: '0px 0px',
@@ -112,8 +112,8 @@ export default function Footer() {
                     transform: 'translateX(-50%)'
                 }}>
                     <h1 style={{
-                    color: 'Blue',
-                    }}>Footer</h1>
+                    color: 'Green',
+                    }}>Footer / Socials</h1>
                 </div>
                 <div className="navbar-right" style={{
                     position: 'absolute',

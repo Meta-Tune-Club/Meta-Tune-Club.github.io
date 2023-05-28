@@ -9,10 +9,6 @@ export default function IndexLayout({ children }: Props) {
     <>
       <IndexHeader />
       <main>{children}</main>
-      <div style={{
-        height: '500px',
-        backgroundColor: 'lightGray',
-      }}></div>
       <Footer />
     </>
   );

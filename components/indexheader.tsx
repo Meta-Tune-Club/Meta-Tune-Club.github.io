@@ -106,8 +106,8 @@ export default function IndexHeader() {
             <nav className="navbar" style={{
                 width: 'auto',
                 maxWidth: '100%',
-                backgroundImage: 'url(/Office-01_1256.png)',
-                height: '500px',
+                backgroundImage: 'url(/newmtc.JPG)',
+                height: '1500px',
                 position: "relative",
                 padding: '0px 0px',
             }}>
@@ -120,20 +120,13 @@ export default function IndexHeader() {
                     <a href="/" style={{
                         padding: '10px 10px'
                     }}>
-                        <div className='DAlogo'>
-                            <Image src="/Logo.png" width={60} height={60} alt="Logo"/>
-                        </div>
+                        <div className='DAlogo' style={{
+                            width: '60px',
+                            height: '60px',
+                            backgroundImage: 'url(/mtcLogo.gif)',
+                            backgroundSize: 'cover'
+                        }}></div>
                     </a>
-                </div>
-                <div className="navbar-middle" style={{
-                    position: 'absolute',
-                    left: '50%',
-                    transform: 'translateX(-50%)'
-                }}>
-                    <h1 style={{
-                    color: 'Blue',
-                    opacity: '40%',
-                    }}>Meta Tune Club</h1>
                 </div>
                 <div className="navbar-right" style={{
                     position: 'absolute',
