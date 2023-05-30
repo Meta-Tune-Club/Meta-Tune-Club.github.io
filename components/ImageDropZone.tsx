@@ -4,17 +4,17 @@ const ImageDropZone = () => {
   const [isDragOver, setIsDragOver] = useState(false);
   const [uploadedImage, setUploadedImage] = useState(null);
 
-  const handleDragOver = (e) => {
+  const handleDragOver = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     setIsDragOver(true);
   };
 
-  const handleDragLeave = (e) => {
+  const handleDragLeave = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     setIsDragOver(false);
   };
 
-  const handleDrop = (e) => {
+  const handleDrop = (e: any) => {
     e.preventDefault();
     setIsDragOver(false);
 
