@@ -50,13 +50,9 @@ export default function HomeownerJobs({ session }: ContractorJobProps) {
       {jobs.length > 0 ? (
         <ul>
           {jobs.map((job) => (
-            <li key={job.id}>
-              <h2>{job.title}</h2>
-              <p>{job.description}</p>
-              <button onClick={() => handleAcceptJob(job.id)}>
-                Accept Job
-              </button>
-            </li>
+<div>
+  
+</div>
           ))}
         </ul>
       ) : (
