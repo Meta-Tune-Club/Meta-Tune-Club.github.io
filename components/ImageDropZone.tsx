@@ -22,7 +22,6 @@ const ImageDropZone = () => {
     if (file && file.type.startsWith('image/')) {
       const reader = new FileReader();
       reader.onload = (event) => {
-        setUploadedImage(event.target.result);
       };
       reader.readAsDataURL(file);
     }

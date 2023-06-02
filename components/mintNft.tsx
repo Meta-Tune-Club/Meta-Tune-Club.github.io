@@ -116,8 +116,6 @@ function MintNft({ session }: MintNftProps) {
         <label>
           Image:
           <div>
-          <h1>Image Drop Zone</h1>
-          <ImageDropZone />
         </div>
           <input type="file" onChange={(e) => setImage(e.target.files?.[0])} />
         </label>
